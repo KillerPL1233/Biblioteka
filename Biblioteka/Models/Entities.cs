@@ -6,12 +6,13 @@ namespace Biblioteka.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
 
-        public ICollection<Rental> Rentals { get; set; }
-        public ICollection<SearchHistory> SavedSearches { get; set; }
+        public ICollection<Rental> Rentals { get; set; } = new List<Rental>();
+        public ICollection<SearchHistory> SavedSearches { get; set; } = new List<SearchHistory>();
     }
+
 
     public class Book
     {
