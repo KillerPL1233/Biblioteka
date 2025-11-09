@@ -1,7 +1,45 @@
+@model List<Biblioteka.Models.Book>
+
 @{
-ViewData["Title"] = "Książki";
+    ViewData["Title"] = "Książki";
+    Layout = "_Layout";
 }
+
 <h1>Lista książek</h1>
-<div>
-<!-- Lista książek -->
-</div>
+
+@if (Model == null || !Model.Any())
+{
+    <p>Brak książek.</p>
+}
+else
+{
+    <div class="table-wrapper">
+        <table class="book-table">
+            <thead>
+                <tr>
+                    <th>Tytuł</th>
+                    <th>Autor</th>
+                    <th>Kategoria</th>
+                    <th>ISBN</th>
+                    <th>Na stanie</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="Books" asp-action="Details" asp-route-id="@book.Id">
+                                @book.Title
+                            </a>
+                        </td>
+                        <td>@book.Author</td>
+                        <td>@book.Category?.Name</td>
+                        <td>@book.ISBN</td>
+                        <td>@book.Stock</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

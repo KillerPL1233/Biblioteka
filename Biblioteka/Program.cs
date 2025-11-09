@@ -22,16 +22,10 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<LibraryDbContext>()
 .AddDefaultTokenProviders();
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI();
 // SEED danych testowych
 using (var scope = app.Services.CreateScope())
 {
@@ -63,7 +57,6 @@ using (var scope = app.Services.CreateScope())
         };
 
         var createResult = userManager.CreateAsync(admin, "Admin!234").GetAwaiter().GetResult();
-        await userManager.CreateAsync(admin, "Admin!234");
         await userManager.AddToRoleAsync(admin, "Administrator");
     }
 
@@ -82,14 +75,18 @@ using (var scope = app.Services.CreateScope())
             TableOfContents = "Spis treści przykładowej książki"
         });
         db.SaveChanges();
-
     }
 }
 
+app.UseStaticFiles();
 
-
-app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
-app.Run();  // 🔥 To jest kluczowy punkt startowy
+
+// DEFAULT → Home/Index
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
+
+app.Run();

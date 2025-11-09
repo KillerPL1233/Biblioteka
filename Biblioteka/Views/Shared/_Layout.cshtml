@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>@ViewData["Title"] - Biblioteka</title>
-<link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Biblioteka</title>
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-<header>
-<nav>
-<a href="/">Home</a> |
-<a href="/Books">Książki</a> |
-<a href="/Cart">Koszyk</a>
-</nav>
-</header>
-<main>
-@RenderBody()
-</main>
-<footer>
-<p>© 2025 Biblioteka</p>
-</footer>
-<script src="~/js/site.js"></script>
+    <header>
+        <nav>
+            <a asp-controller="Home" asp-action="Index">Home</a> |
+            <a asp-controller="Books" asp-action="Index">Książki</a> |
+            <a asp-controller="Cart" asp-action="Index">Koszyk</a>
+        </nav>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer>
+        <p>© 2025 Biblioteka</p>
+    </footer>
+
+    <script src="~/js/site.js"></script>
 </body>
 </html>

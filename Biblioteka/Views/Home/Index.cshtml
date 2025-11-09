@@ -1,5 +1,13 @@
 @{
-ViewData["Title"] = "Strona główna";
+    ViewData["Title"] = "Strona główna";
+    Layout = "_Layout";
 }
+
 <h1>Witamy w Bibliotece</h1>
-<p>Przeglądaj dostępne książki i wypożyczaj je online.</p>
+
+<div class="book-card">
+    <h2>Znajdź i wypożycz książki</h2>
+    <p>Przeglądaj katalog, wypożyczaj i zarządzaj swoją kolejką.</p>
+</div>
+
+<a asp-controller="Books" asp-action="Index" class="btn">Przeglądaj książki</a>
