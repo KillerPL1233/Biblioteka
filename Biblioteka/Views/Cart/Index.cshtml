@@ -1,0 +1,47 @@
+@model List<Biblioteka.Models.Book>
+
+@{
+    ViewData["Title"] = "Koszyk";
+    Layout = "_Layout";
+}
+
+<h1>Twój koszyk</h1>
+
+@if (Model == null || !Model.Any())
+{
+    <p>Twój koszyk jest pusty.</p>
+}
+else
+{
+    <div class="table-wrapper">
+        <table class="book-table">
+            <thead>
+                <tr>
+                    <th>Tytuł</th>
+                    <th>Autor</th>
+                    <th>ISBN</th>
+                    <th>Usuń</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>@book.Author</td>
+                        <td>@book.ISBN</td>
+                        <td>
+                            <form method="post" asp-action="Remove" asp-route-id="@book.Id">
+                                <button type="submit">Usuń</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <form method="post" asp-action="Confirm">
+        <button type="submit" class="btn btn-primary">Potwierdź wypożyczenie</button>
+    </form>
+}
