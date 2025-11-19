@@ -22,9 +22,15 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<LibraryDbContext>()
 .AddDefaultTokenProviders();
 
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // SEED danych testowych
 using (var scope = app.Services.CreateScope())
@@ -78,10 +84,12 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 // DEFAULT → Home/Index
 app.MapControllerRoute(
